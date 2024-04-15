@@ -1,5 +1,5 @@
 // .c
-#include "../CDataframe-Dorian-william/Code/function.h"
+#include "function.h"
 
 int main()
 {
