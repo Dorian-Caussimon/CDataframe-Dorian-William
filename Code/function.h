@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 typedef struct // (Type) Colonne d'un CDataframe
 {
     char title;
