@@ -1,4 +1,8 @@
 // .c
 #include "function.h"
+#define REALLOC_SIZE 256; //(Utilisation : Réallocation)
 
-#define REALLOC_SIZE 256;
+COLUMN create_column(char* title)
+{
+    
+}

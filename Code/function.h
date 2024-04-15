@@ -5,11 +5,13 @@
 
 typedef struct // (Type) Colonne d'un CDataframe
 {
-    char titre;
-    int taille_logique;
-    int taille_physique;
-    int *donnees;
-} column;
+    char title;
+    int logical_size;
+    int physical_size;
+    int *data;
+} COLUMN;
+
+COLUMN create_column(char* title);
 
 #ifndef DATAFRAME_C_FUNCTION_H
 #define DATAFRAME_C_FUNCTION_H
