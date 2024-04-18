@@ -35,6 +35,12 @@ void delete_column(COLUMN **col);
 * @param: Pointer to a column
 */
 void print_col(COLUMN *col);
+int search_occurrences_incol(COLUMN *col, int val);
+int pos_val(COLUMN *col, int val);
+int sup_val(COLUMN *col, int val);
+int inf_val(COLUMN *col, int val);
+
+
 #ifndef DATAFRAME_C_FUNCTION_H
 #define DATAFRAME_C_FUNCTION_H
 
