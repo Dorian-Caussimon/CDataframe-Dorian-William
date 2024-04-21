@@ -40,14 +40,7 @@ int pos_val(COLUMN *col, int val);
 int sup_val(COLUMN *col, int val);
 int inf_val(COLUMN *col, int val);
 
-/*--------------------------------------------------------------Fonction CDdatafame----------------------------------------------*/
-typedef struct {
-    COLUMN **col;
-    int num_col;
-} CDdataframe;
-CDdataframe *create_cddataframe();
-void fill_CDdataframe(CDdataframe *df);
-void print_CDdatafram(CDdataframe *df);
+
 #ifndef DATAFRAME_C_FUNCTION_H
 #define DATAFRAME_C_FUNCTION_H
 
