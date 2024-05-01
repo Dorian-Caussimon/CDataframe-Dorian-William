@@ -31,6 +31,15 @@ typedef struct column {
     ENUM_TYPE column_type;
     COL_TYPE **data; // array of pointers to stored data
     unsigned long long int *index; // array of integers
+// index valid
+// 0 : no index
+// -1 : invalid index
+// 1 : valid index
+    int valid_index;
+// direction de tri Ascendant ou Déscendant
+// 0 : ASC
+// 1 : DESC
+    int sort_dir;
 } COLUMN;
 
 /**
@@ -72,6 +81,12 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
 * @param: Pointer to the column to display
 */
 void print_col(COLUMN* col);
+
+int number_occurence(COLUMN *col, char *x);
+int pos_val(COLUMN *col, char *x);
+int sup_val(COLUMN *col, char *x);
+int inf_val(COLUMN *col, char *x);
+
 /*
 
 /**
