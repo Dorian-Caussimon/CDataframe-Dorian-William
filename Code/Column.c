@@ -2,21 +2,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <intrin.h>
+void user_value(COLUMN *col)
+{
+    unsigned int v1;
+    int v2;
+    char v3;
+    float v4;
+    double v5;
+    char *v6;
 
+    switch (col->column_type) {
+        case UINT:
+            scanf("%d", &v1);
+            insert_value(col,&v1);
+            break;
+        case INT:
+            scanf("%d",&v2);
+            insert_value(col,&v2);
+            break;
+        case CHAR:
+            scanf("%c",&v3);
+            insert_value(col,&v3);
+            break;
+        case FLOAT:
+            scanf("%f",&v4);
+            insert_value(col,&v4);
+            break;
+        case DOUBLE:
+            scanf("%lf",&v5);
+            insert_value(col,&v5);
+            break;
+        case STRING:
+            scanf("%s",v6);
+            insert_value(col,v6);
+            break;
+        default:
+            printf("ERROR");
+    }
+}
 
 COLUMN *create_column(ENUM_TYPE type, char *title)
 {
     COLUMN *col= (COLUMN*) malloc(sizeof(COLUMN));
-    col ->title = title;
+    col -> title = title;
     col -> logical_size = 0;
     col -> physical_size = 0;
     col -> data = NULL;
     col -> column_type = type;
-    col->sort_dir = 0;
+    col -> sort_dir = 0;
     return col;
 }
-
-int insert_value(COLUMN *col,void  *value)
+int insert_value(COLUMN *col,void *value)
 {
     if (col == NULL) {
         return 0;
@@ -53,8 +89,8 @@ int insert_value(COLUMN *col,void  *value)
                 *((double *) col->data[col->logical_size]) = *((double *) value);
                 break;
             case STRING:
-                col->data[col->logical_size] = (COL_TYPE *) malloc(sizeof(char *));
-                *((char **) col->data[col->logical_size]) = (char *) value;
+                col->data[col->logical_size] = malloc(strlen((char *)value) + 1);
+                strcpy((char *)col->data[col->logical_size], (char *)value);
                 break;
             case STRUCTURE:
                 col->data[col->logical_size] = (COL_TYPE*) malloc(sizeof(200));
@@ -69,7 +105,6 @@ int insert_value(COLUMN *col,void  *value)
     col->logical_size++;
     return 1;
 }
-
 void delete_column(COLUMN **col)
 {
     for (int i = 0; i < (*col)->logical_size ; i++){
@@ -111,15 +146,14 @@ void convert_value(COLUMN* col, unsigned long long int i, char *str, int size) {
         }
         return;
 }
-
 void print_col(COLUMN* col){
     char str[10];
+    printf("%s\n", col->title);
     for(int i = 0 ; i < col->logical_size ; i++){
         convert_value(col, i, str, 10);
-        printf("[%d] : %s\n",i,str);
+        printf("[%d] : %s\n",i+1,str);
     }
 }
-
 int number_occurence(COLUMN *col , char *x)
 {
     char str[10];
@@ -130,7 +164,6 @@ int number_occurence(COLUMN *col , char *x)
         }
     return cpt;
 }
-
 int pos_val(COLUMN *col, char *x)
 {
     char str[10];
@@ -151,7 +184,6 @@ int sup_val(COLUMN *col, char *x)
     }
     return cpt;
 }
-
 int inf_val(COLUMN *col, char *x)
 {
     char str[10];
@@ -161,4 +193,23 @@ int inf_val(COLUMN *col, char *x)
         (str <= x)? cpt ++ : cpt ;
     }
     return cpt;
+}
+COLUMN *create_column_by_user(ENUM_TYPE coltype)
+{
+    char name[20];
+    int nb_raw = 0;
+    printf("Choisi un nom pour la colonne:");
+    scanf("%20s",name);
+
+    while (nb_raw <= 0){
+        printf("Nombre de ligne voulue :");
+        scanf("%d",&nb_raw);
+    }
+    COLUMN *col = create_column(coltype,name);
+
+    for (int j = 0 ; j < nb_raw ; j++){
+        printf("Ligne [%d] :",j+1);
+        user_value(col);
+    }
+    return col;
 }

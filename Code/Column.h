@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef enum enum_type
-{
+typedef enum enum_type{
     NULLVAL = 1,
     UINT,
     INT,
@@ -87,40 +86,9 @@ int pos_val(COLUMN *col, char *x);
 int sup_val(COLUMN *col, char *x);
 int inf_val(COLUMN *col, char *x);
 
-/*
+COLUMN *create_column_by_user(ENUM_TYPE coltype);
 
-/**
-* Create a column
-* @param1 : Column title
-* @return : Pointer to created column
-/
-COLUMN *create_column(char *title);
-
-/**
-* @brief Add a new value to a column
-* @param1 : Pointer to a column
-* @param2 : The value to be added
-* @return : 1 if the value is added 0 otherwise
-/
-int insert_value(COLUMN *col, int value);
-
-/**
-* @brief : Free allocated memory
-* @param1 : Pointer to a column
-/
-void delete_column(COLUMN **col);
-
-/**
-* @brief: Print a column content
-* @param: Pointer to a column
-/
-void print_col(COLUMN *col);
-int search_occurrences_incol(COLUMN *col, int val);
-int pos_val(COLUMN *col, int val);
-int sup_val(COLUMN *col, int val);
-int inf_val(COLUMN *col, int val);
-*/
-
+void user_value(COLUMN *col);
 #ifndef DATAFRAME_C_FUNCTION_H
 #define DATAFRAME_C_FUNCTION_H
 

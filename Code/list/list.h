@@ -4,7 +4,7 @@
 * Élément lnode
 */
 typedef struct lnode_ {
-    void *data;
+    void *data; // pointer to a column
     struct lnode_ *prev;
     struct lnode_ *next;
 } lnode;
@@ -71,4 +71,5 @@ lnode *get_next_node(list * lst, lnode * lnode);
 * retourne le node precedent
 */
 void *get_previous_elem(list * lst, lnode * lnode);
+
 #endif //CDATAFRAME_DORIAN_WILLIAM_LIST_H
