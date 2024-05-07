@@ -88,7 +88,7 @@ int inf_val(COLUMN *col, char *x);
 
 COLUMN *create_column_by_user(ENUM_TYPE coltype);
 
-void user_value(COLUMN *col);
+static void user_value(COLUMN *col);
 #ifndef DATAFRAME_C_FUNCTION_H
 #define DATAFRAME_C_FUNCTION_H
 

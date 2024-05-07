@@ -2,6 +2,6 @@
 int main()
 {
     CDATAFRAME *mycol = create_dataframe_by_user();
-    print_col(mycol);
+    printCdataframe(mycol);
     return 0;
 }

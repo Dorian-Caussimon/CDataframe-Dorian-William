@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <intrin.h>
-void user_value(COLUMN *col)
+static void user_value(COLUMN *col)
 {
     unsigned int v1;
     int v2;
@@ -147,10 +147,10 @@ void convert_value(COLUMN* col, unsigned long long int i, char *str, int size) {
         return;
 }
 void print_col(COLUMN* col){
-    char str[10];
+    char str[20];
     printf("%s\n", col->title);
     for(int i = 0 ; i < col->logical_size ; i++){
-        convert_value(col, i, str, 10);
+        convert_value(col, i, str, 20);
         printf("[%d] : %s\n",i+1,str);
     }
 }
@@ -196,7 +196,7 @@ int inf_val(COLUMN *col, char *x)
 }
 COLUMN *create_column_by_user(ENUM_TYPE coltype)
 {
-    char name[20];
+    char *name;
     int nb_raw = 0;
     printf("Choisi un nom pour la colonne:");
     scanf("%20s",name);
