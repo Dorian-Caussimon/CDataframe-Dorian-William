@@ -1,7 +1,7 @@
 #define REALLOC_SIZE 256; //(Utilisation : Réallocation)
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <intrin.h>
 typedef enum enum_type{
     NULLVAL = 1,
     UINT,
@@ -24,7 +24,7 @@ typedef union column_type{
 }COL_TYPE;
 
 typedef struct column {
-    char *title;
+    char *title; // titre de la colone
     unsigned int logical_size; //size
     unsigned int physical_size; // max_size
     ENUM_TYPE column_type;
@@ -87,7 +87,8 @@ int sup_val(COLUMN *col, char *x);
 int inf_val(COLUMN *col, char *x);
 
 COLUMN *create_column_by_user(ENUM_TYPE coltype);
-
+void add_value_after_pos(COLUMN *col, int nb_row);
+void del_value_pos(COLUMN *col, int nb_row);
 static void user_value(COLUMN *col);
 #ifndef DATAFRAME_C_FUNCTION_H
 #define DATAFRAME_C_FUNCTION_H

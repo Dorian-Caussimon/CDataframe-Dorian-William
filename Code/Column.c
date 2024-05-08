@@ -1,7 +1,4 @@
 #include "Column.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <intrin.h>
 static void user_value(COLUMN *col)
 {
     unsigned int v1;
@@ -154,14 +151,16 @@ void print_col(COLUMN* col){
         printf("[%d] : %s\n",i+1,str);
     }
 }
-int number_occurence(COLUMN *col , char *x)
+int number_occurence(COLUMN *col ,  char *x)
 {
-    char str[10];
+    char str[20];
     int cpt = 0;
-        for(int i = 0; i < col->logical_size ; i++){
-            convert_value(col, i, str, 10);
-            (str == x)? cpt ++ : cpt ;
+    for (int i = 0; i < col->logical_size; i++) {
+        convert_value(col, i, str, 20);
+        if (strcmp(str, x) == 0) {
+            cpt++;
         }
+    }
     return cpt;
 }
 int pos_val(COLUMN *col, char *x)
@@ -196,10 +195,10 @@ int inf_val(COLUMN *col, char *x)
 }
 COLUMN *create_column_by_user(ENUM_TYPE coltype)
 {
-    char *name;
+    char *name = (char*) malloc(sizeof (char*));
     int nb_raw = 0;
     printf("Choisi un nom pour la colonne:");
-    scanf("%20s",name);
+    scanf("%s",name);
 
     while (nb_raw <= 0){
         printf("Nombre de ligne voulue :");
@@ -212,4 +211,30 @@ COLUMN *create_column_by_user(ENUM_TYPE coltype)
         user_value(col);
     }
     return col;
+}
+void add_value_after_pos(COLUMN *col, int pos)
+{
+    if (col == NULL || pos <= 0){ // verification
+        return;
+    }
+    unsigned int keeper = col->logical_size;
+
+    for (unsigned int i = col->logical_size; i > pos ; i--){
+        printf("verif\n");
+        col->data[i] = col->data[i-1];
+    }
+    col->logical_size = pos;
+    printf(" saisir la valeur a ajouter a la ligne :");
+    user_value(col);
+    col->logical_size = keeper+1;
+}
+void del_value_pos(COLUMN *col, int pos)
+{
+    if (col == NULL || pos <= 0){
+        return;
+    }
+    for (int i = pos; i > col->logical_size ; i--){
+        col->data[i] = col->data[i+1];
+    }
+    col->logical_size--;
 }
