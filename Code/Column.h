@@ -69,12 +69,6 @@ void delete_column(COLUMN **col);
 * @param4: Maximum size of the string
 */
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
-
-
-
-
-
-
 /**
 * @brief: Display the content of a column
 * @param: Pointer to the column to display
@@ -82,14 +76,14 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
 void print_col(COLUMN* col);
 
 int number_occurence(COLUMN *col, char *x);
-int pos_val(COLUMN *col, char *x);
-int sup_val(COLUMN *col, char *x);
-int inf_val(COLUMN *col, char *x);
+int sup_val(COLUMN *col, void *x);
+int inf_val(COLUMN *col, void *x);
 
 COLUMN *create_column_by_user(ENUM_TYPE coltype);
 void add_value_after_pos(COLUMN *col, int nb_row);
 void del_value_pos(COLUMN *col, int nb_row);
-static void user_value(COLUMN *col);
+void user_value(COLUMN *col);
+
 #ifndef DATAFRAME_C_FUNCTION_H
 #define DATAFRAME_C_FUNCTION_H
 

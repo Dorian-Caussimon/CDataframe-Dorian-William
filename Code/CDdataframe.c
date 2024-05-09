@@ -67,7 +67,6 @@ void name_col(CDATAFRAME *cdf, int nb_col){
 void printCdataframe(CDATAFRAME *cdf)
 {
     char str[20];
-    printf("test");
     int max = max_row_col_cdf(cdf), nb_col = 0, nb_row;
 
     lnode *node;
@@ -183,7 +182,7 @@ void insert_column_cdf(CDATAFRAME *cdf, char *col_name)
     }
 }
 
-void insert_CDF_line_after(CDATAFRAME *cdf, int pos)// a verif
+void insert_CDF_line_after(CDATAFRAME *cdf, int pos)
 {
     lnode *node = cdf->list->head;
     for (int i = 0 ; i < cdf->size; i++){
@@ -191,7 +190,7 @@ void insert_CDF_line_after(CDATAFRAME *cdf, int pos)// a verif
         node = node->next;
     }
 }
-void del_CDF_line(CDATAFRAME *cdf, int pos)// a verif
+void del_CDF_line(CDATAFRAME *cdf, int pos)
 {
     lnode *node = cdf->list->head;
     for (int i = 0 ; i < cdf->size; i++){
@@ -199,18 +198,56 @@ void del_CDF_line(CDATAFRAME *cdf, int pos)// a verif
         node = node->next;
     }
 }
-void rename_col(CDATAFRAME *cdf, char *col_name_replace) // a verif
+void rename_col(CDATAFRAME *cdf, char *col_name_replace)
 {
     lnode *node = cdf->list->head;
     COLUMN *col;
-    char *str = (char*) malloc(sizeof (char*));
+    char *str = (char*) malloc(sizeof(char*));
+    printf("veuiller choisire le nouveaux nom de la colonne : ");
+    scanf(" %s",str);
     for (int i = 0 ; i < cdf->size ;i++){
         col = node->data;
         if (strcmp(col->title, col_name_replace) == 0){
-            printf("veuiller choisire le nouveaux nom de la colonne");
-            scanf("%s",str);
-            col->title = str
+            col->title = str;
         }
     }
-    free(str);
+}
+void replace_value_cdf(CDATAFRAME *cdf, int pos_row, int pos_col)
+{
+    unsigned int keeper = 0;
+    lnode *node = cdf->list->head;
+    COLUMN *col = NULL;
+    for (int i = 0; i < pos_col-1 ; i++){
+        node = node->next;
+    }
+    col = node->data;
+    keeper = col->logical_size;
+    col->logical_size = pos_row-1;
+    printf("Saisir la valeur qui vas remplacer la valeur : ");
+    user_value(col);
+    col->logical_size = keeper;
+}
+void count_val_sup_CDF(CDATAFRAME *cdf) // a tester
+{
+    int cpt = 0;
+    char *str = NULL;
+    lnode *node = cdf->list->head;
+    printf("Veuiller saisir la valeur pour la recherche : ");
+    scanf("%s",str);
+    for (int i = 0 ; i < cdf -> size; i++){
+        cpt += sup_val(node->data,str);
+        node = node->next;
+    }
+}
+void count_val_inf_CDF(CDATAFRAME *cdf) // a tester
+{
+    int cpt = 0;
+    char *str = NULL;
+    lnode *node = cdf->list->head;
+    printf("Veuiller saisir la valeur pour la recherche : ");
+    scanf("%s",str);
+    for (int i = 0 ; i < cdf -> size; i++){
+        cpt += inf_val(node->data,str);
+        node = node->next;
+    }
 }

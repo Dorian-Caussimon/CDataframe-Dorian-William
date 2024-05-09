@@ -1,5 +1,5 @@
 #include "Column.h"
-static void user_value(COLUMN *col)
+void user_value(COLUMN *col)
 {
     unsigned int v1;
     int v2;
@@ -93,6 +93,8 @@ int insert_value(COLUMN *col,void *value)
                 col->data[col->logical_size] = (COL_TYPE*) malloc(sizeof(200));
                 col->data[col->logical_size] = value;
                 break;
+            default:
+                break;
 
         }
         col->logical_size++;
@@ -163,35 +165,101 @@ int number_occurence(COLUMN *col ,  char *x)
     }
     return cpt;
 }
-int pos_val(COLUMN *col, char *x)
+
+int sup_val(COLUMN *col, void *x)
 {
-    char str[10];
     int cpt = 0;
-    for(int i = 0; i < col->logical_size ; i++){
-        convert_value(col, i, str, 10);
-        (str == x)? cpt = i : cpt ;
+
+    if (col == NULL || col->logical_size == 0) {
+        return cpt;
     }
+
+    for (unsigned int i = 0; i < col->logical_size; i++) {
+        switch (col->column_type) {
+            case UINT:
+                if (*((unsigned int *)col->data[i]) > *((unsigned int *)x)) {
+                    cpt++;
+                }
+                break;
+            case INT:
+                if (*((int *)col->data[i]) > *((int *)x)) {
+                    cpt++;
+                }
+                break;
+            case CHAR:
+                if (*((char *)col->data[i]) > *((char *)x)) {
+                    cpt++;
+                }
+                break;
+            case FLOAT:
+                if (*((float *)col->data[i]) > *((float *)x)) {
+                    cpt++;
+                }
+                break;
+            case DOUBLE:
+                if (*((double *)col->data[i]) > *((double *)x)) {
+                    cpt++;
+                }
+                break;
+            case STRING:
+                if (strcmp((char *)col->data[i], (char *)x) > 0) {
+                    cpt++;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     return cpt;
 }
-int sup_val(COLUMN *col, char *x)
+int inf_val(COLUMN *col, void *x)
 {
-    char str[10];
-    int cpt = 0;
-    for(int i = 0; i < col->logical_size ; i++){
-        convert_value(col, i, str, 10);
-        (str >= x)? cpt ++ : cpt ;
+    int count = 0;
+
+    if (col == NULL || col->logical_size == 0) {
+        return count;
     }
-    return cpt;
+
+    for (unsigned int i = 0; i < col->logical_size; i++) {
+        switch (col->column_type) {
+            case UINT:
+                if (*((unsigned int *)col->data[i]) > *((unsigned int *)x)) {
+                    count++;
+                }
+                break;
+            case INT:
+                if (*((int *)col->data[i]) > *((int *)x)) {
+                    count++;
+                }
+                break;
+            case CHAR:
+                if (*((char *)col->data[i]) > *((char *)x)) {
+                    count++;
+                }
+                break;
+            case FLOAT:
+                if (*((float *)col->data[i]) > *((float *)x)) {
+                    count++;
+                }
+                break;
+            case DOUBLE:
+                if (*((double *)col->data[i]) > *((double *)x)) {
+                    count++;
+                }
+                break;
+            case STRING:
+                if (strcmp((char *)col->data[i], (char *)x) > 0) {
+                    count++;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    return count;
 }
-int inf_val(COLUMN *col, char *x)
-{
-    char str[10];
-    int cpt = 0;
-    for(int i = 0; i < col->logical_size ; i++){
-        convert_value(col, i, str, 10);
-        (str <= x)? cpt ++ : cpt ;
-    }
-    return cpt;
 }
 COLUMN *create_column_by_user(ENUM_TYPE coltype)
 {
@@ -220,7 +288,6 @@ void add_value_after_pos(COLUMN *col, int pos)
     unsigned int keeper = col->logical_size;
 
     for (unsigned int i = col->logical_size; i > pos ; i--){
-        printf("verif\n");
         col->data[i] = col->data[i-1];
     }
     col->logical_size = pos;
@@ -233,7 +300,7 @@ void del_value_pos(COLUMN *col, int pos)
     if (col == NULL || pos <= 0){
         return;
     }
-    for (int i = pos; i > col->logical_size ; i--){
+    for (int i = pos-1; i < col->logical_size ; i++){
         col->data[i] = col->data[i+1];
     }
     col->logical_size--;

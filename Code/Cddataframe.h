@@ -46,6 +46,12 @@ void reshears_occurence_CDF(CDATAFRAME *cdf);
 void name_col(CDATAFRAME *cdf, int nb_col);
 void insert_column_cdf(CDATAFRAME *cdf,  char *col_name);
 void insert_CDF_line(CDATAFRAME *cdf, int nb_row);
+void del_CDF_line(CDATAFRAME *cdf, int pos);
+void rename_col(CDATAFRAME *cdf, char *col_name_replace);
+void insert_CDF_line_after(CDATAFRAME *cdf, int pos);
+void replace_value_cdf(CDATAFRAME *cdf, int pos_row, int pos_col);
+void count_val_inf_CDF(CDATAFRAME *cdf);
+void count_val_sup_CDF(CDATAFRAME *cdf);
 #ifndef CDATAFRAME_DORIAN_WILLIAM_CDDATAFRAME_H
 #define CDATAFRAME_DORIAN_WILLIAM_CDDATAFRAME_H
 
