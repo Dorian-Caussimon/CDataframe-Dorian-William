@@ -1,6 +1,12 @@
 #include "Column.h"
+
+//Permet de choisir la bonne entrée pour la saisie de valeur de l'utilisateur dans certaines fonctions
 void user_value(COLUMN *col)
 {
+    if (col == NULL){ // vérification
+        printf("Colonne vide");
+        return;
+    }
     unsigned int v1;
     int v2;
     char v3;
@@ -8,7 +14,7 @@ void user_value(COLUMN *col)
     double v5;
     char *v6;
 
-    switch (col->column_type) {
+    switch (col->column_type) { // vérifie le type de la colonne
         case UINT:
             scanf("%d", &v1);
             insert_value(col,&v1);
@@ -18,7 +24,7 @@ void user_value(COLUMN *col)
             insert_value(col,&v2);
             break;
         case CHAR:
-            scanf("%c",&v3);
+            scanf(" %c",&v3);
             insert_value(col,&v3);
             break;
         case FLOAT:
@@ -30,7 +36,7 @@ void user_value(COLUMN *col)
             insert_value(col,&v5);
             break;
         case STRING:
-            scanf("%s",v6);
+            scanf(" %s",v6);
             insert_value(col,v6);
             break;
         default:
@@ -38,6 +44,7 @@ void user_value(COLUMN *col)
     }
 }
 
+//Permet de créer une colonne vide et initialise toute les valeurs de départ
 COLUMN *create_column(ENUM_TYPE type, char *title)
 {
     COLUMN *col= (COLUMN*) malloc(sizeof(COLUMN));
@@ -49,13 +56,16 @@ COLUMN *create_column(ENUM_TYPE type, char *title)
     col -> sort_dir = 0;
     return col;
 }
+
+// Permet d'insérer une valeur dans la colonne
 int insert_value(COLUMN *col,void *value)
 {
-    if (col == NULL) {
+    if (col == NULL){
+        printf("Colonne vide");
         return 0;
     }
 
-    if (col->logical_size >= col->physical_size) {
+    if (col->logical_size >= col->physical_size) { // réalocation de la mémoir si besoin
         col->physical_size = col->physical_size + REALLOC_SIZE
         col->data = realloc(col->data, col->physical_size * sizeof(COL_TYPE *));
         if (col->data == NULL) {
@@ -64,7 +74,7 @@ int insert_value(COLUMN *col,void *value)
     }
     // Allocation de mémoire pour stocker la valeur
     if (value != NULL) {
-        switch (col->column_type) {
+        switch (col->column_type) { // vérifie le type de la colonne et alloue la mémoir nécessaire
             case UINT:
                 col->data[col->logical_size] = (COL_TYPE *) malloc(sizeof(unsigned int));
                 *((unsigned int *) col->data[col->logical_size]) = *((unsigned int *) value);
@@ -104,10 +114,12 @@ int insert_value(COLUMN *col,void *value)
     col->logical_size++;
     return 1;
 }
+
+// Peremet la suppresion d'une colonne
 void delete_column(COLUMN **col)
 {
     for (int i = 0; i < (*col)->logical_size ; i++){
-        free(((*col)->data[i]));
+        free(((*col)->data[i])); // Libère la mémoire de chaque case
     }
     //((*col)->title == NULL)? : free((*col)->title),(*col)->title = NULL;
     //((*col)->index == NULL)? : free((*col)->index),(*col)->index = NULL;
@@ -116,12 +128,14 @@ void delete_column(COLUMN **col)
     free(*col);
     *col = NULL;
 }
+
+//Permet de convertir une valeur en chaîne de caractère si besoin de l'afficher ou de la comparer, Chaine de caractère crée grace a la fonction snprintf
 void convert_value(COLUMN* col, unsigned long long int i, char *str, int size) {
     if (col->data[i] == NULL) {
         strcpy(str, "NULL");
         return;
     }
-        switch (col->column_type) {
+        switch (col->column_type) { // Verification du type de la colonne
         case UINT:
             snprintf(str, size, "%d", *((unsigned int *) col->data[i]));
             break;
@@ -145,19 +159,13 @@ void convert_value(COLUMN* col, unsigned long long int i, char *str, int size) {
         }
         return;
 }
-void print_col(COLUMN* col){
-    char str[20];
-    printf("%s\n", col->title);
-    for(int i = 0 ; i < col->logical_size ; i++){
-        convert_value(col, i, str, 20);
-        printf("[%d] : %s\n",i+1,str);
-    }
-}
+
+//Permet de calculer le nombre d'occurrences d'une valeur dans une colonne
 int number_occurence(COLUMN *col ,  char *x)
 {
     char str[20];
     int cpt = 0;
-    for (int i = 0; i < col->logical_size; i++) {
+    for (int i = 0; i < col->logical_size; i++) { // Boucle pour parcourire la colonne
         convert_value(col, i, str, 20);
         if (strcmp(str, x) == 0) {
             cpt++;
@@ -166,6 +174,7 @@ int number_occurence(COLUMN *col ,  char *x)
     return cpt;
 }
 
+//Permet de calculer le nombre de valeur supérieur a une valeur x dans une colonne
 int sup_val(COLUMN *col, void *x)
 {
     int cpt = 0;
@@ -174,7 +183,7 @@ int sup_val(COLUMN *col, void *x)
         return cpt;
     }
 
-    for (unsigned int i = 0; i < col->logical_size; i++) {
+    for (unsigned int i = 0; i < col->logical_size; i++) { // compare selon le type
         switch (col->column_type) {
             case UINT:
                 if (*((unsigned int *)col->data[i]) > *((unsigned int *)x)) {
@@ -213,6 +222,8 @@ int sup_val(COLUMN *col, void *x)
 
     return cpt;
 }
+
+//Permet de calculer le nombre de valeur inférieur a une valeur x dans une colonne
 int inf_val(COLUMN *col, void *x)
 {
     int count = 0;
@@ -221,7 +232,7 @@ int inf_val(COLUMN *col, void *x)
         return count;
     }
 
-    for (unsigned int i = 0; i < col->logical_size; i++) {
+    for (unsigned int i = 0; i < col->logical_size; i++) { // compare selon le type
         switch (col->column_type) {
             case UINT:
                 if (*((unsigned int *)col->data[i]) > *((unsigned int *)x)) {
@@ -260,7 +271,8 @@ int inf_val(COLUMN *col, void *x)
 
     return count;
 }
-}
+
+// Permet de créer une colonne avec des saisis d'utilisateurs
 COLUMN *create_column_by_user(ENUM_TYPE coltype)
 {
     char *name = (char*) malloc(sizeof (char*));
@@ -280,6 +292,8 @@ COLUMN *create_column_by_user(ENUM_TYPE coltype)
     }
     return col;
 }
+
+//Permet d'ajouter une valeur après une certaine position dans la colonne
 void add_value_after_pos(COLUMN *col, int pos)
 {
     if (col == NULL || pos <= 0){ // verification
@@ -287,7 +301,7 @@ void add_value_after_pos(COLUMN *col, int pos)
     }
     unsigned int keeper = col->logical_size;
 
-    for (unsigned int i = col->logical_size; i > pos ; i--){
+    for (unsigned int i = col->logical_size; i > pos ; i--){ // boucle qui parcoure la colonne pour décaler les donnée est inséré la valeur
         col->data[i] = col->data[i-1];
     }
     col->logical_size = pos;
@@ -295,12 +309,14 @@ void add_value_after_pos(COLUMN *col, int pos)
     user_value(col);
     col->logical_size = keeper+1;
 }
+
+//Permet de supprimer une valeur a une certaine position dans la colonne
 void del_value_pos(COLUMN *col, int pos)
 {
     if (col == NULL || pos <= 0){
         return;
     }
-    for (int i = pos-1; i < col->logical_size ; i++){
+    for (int i = pos-1; i < col->logical_size ; i++){ // boucle qui parcoure la colonne pour supprimer la valeur
         col->data[i] = col->data[i+1];
     }
     col->logical_size--;

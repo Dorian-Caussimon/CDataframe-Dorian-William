@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <intrin.h>
+#include <string.h>
 typedef enum enum_type{
     NULLVAL = 1,
     UINT,
@@ -41,47 +42,26 @@ typedef struct column {
     int sort_dir;
 } COLUMN;
 
-/**
-* Create a new column
-* @param1 : Column type
-* @param2 : Column title
-* @return : Pointer to the created column
-*/
 COLUMN *create_column(ENUM_TYPE type, char *title);
 
-/**
-* @brief: Insert a new value into a column
-* @param1: Pointer to the column
-* @param2: Pointer to the value to insert
-* @return: 1 if the value is correctly inserted 0 otherwise
-*/
 int insert_value(COLUMN *col, void *value);
-/**
-* @brief: Free the space allocated by a column
-* @param1: Pointer to the column
-*/
+
 void delete_column(COLUMN **col);
-/**
-* @brief: Convert a value into a string
-* @param1: Pointer to the column
-* @param2: Position of the value in the data array
-* @param3: The string in which the value will be written
-* @param4: Maximum size of the string
-*/
+
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
-/**
-* @brief: Display the content of a column
-* @param: Pointer to the column to display
-*/
-void print_col(COLUMN* col);
 
 int number_occurence(COLUMN *col, char *x);
+
 int sup_val(COLUMN *col, void *x);
+
 int inf_val(COLUMN *col, void *x);
 
 COLUMN *create_column_by_user(ENUM_TYPE coltype);
+
 void add_value_after_pos(COLUMN *col, int nb_row);
+
 void del_value_pos(COLUMN *col, int nb_row);
+
 void user_value(COLUMN *col);
 
 #ifndef DATAFRAME_C_FUNCTION_H
