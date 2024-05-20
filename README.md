@@ -34,28 +34,32 @@ Pour télécharger le projet il faut vous rendre sur git hub télécharger le fi
 Pour utiliser le programme, il vous suffit de suivre les instructions présentes dans votre terminal,et tapez-les nombres correspondant à votre besoin
 ## Fonctionalités
 Voici la liste des fonctionnalités présentes,
-1. Alimentation
-   -[x] Création d’un CDataframe vide
-   -[x] Remplissage du CDataframe à partir de saisies utilisateurs
-   -[ ] Remplissage en dur du CDataframe
-2. Affichage
-   -[x] Afficher tout le CDataframe
-   -[x] Afficher une partie des lignes du CDataframe selon une limite fournie par l’utilisateur
-   -[x] Afficher une partie des colonnes du CDataframe selon une limite fournie par l’utilisateur
-3. Opérations usuelles
-   -[x] Ajouter une ligne de valeurs au CDataframe
-   -[x] Supprimer une ligne de valeurs du CDataframe
-   -[x] Ajouter une colonne au CDataframe
-   -[x] Supprimer une colonne du CDataframe
-   -[x] Renommer le titre d’une colonne du CDataframe
-   -[x] Vérifier l’existence d’une valeur (recherche) dans le CDataframe
-   -[x] Accéder/remplacer la valeur se trouvant dans une cellule du CDataframe en utilisant son
-   numéro de ligne et de colonne
-   -[x] Afficher les noms des colonnes 
-4. Analyse et statistiques
-   -[x] Afficher le nombre de lignes
-   -[x] Afficher le nombre de colonnes
-   -[x] Nombre de cellules égales à x (x donné en paramètre)
-   -[x] Nombre de cellules contenant une valeur supérieure à x (x donné en paramètre)
-   -[x] Nombre de cellules contenant une valeur inférieure à x (x donné en paramètre)
-
+<p>
+1. Alimentation<br>
+<input type="checkbox" checked disabled> Création d’un CDataframe vide<br>
+<input type="checkbox" checked disabled> Remplissage du CDataframe à partir de saisies utilisateurs<br>
+<input type="checkbox" disabled> Remplissage en dur du CDataframe<br>
+<br>
+2. Affichage<br>
+   <input type="checkbox" checked disabled> Afficher tout le CDataframe<br>
+   <input type="checkbox" checked disabled> Afficher une partie des lignes du CDataframe selon une limite fournie par l’utilisateur<br>
+   <input type="checkbox" checked disabled> Afficher une partie des colonnes du CDataframe selon une limite fournie par l’utilisateur<br>
+<br>
+3. Opérations usuelles<br>
+   <input type="checkbox" checked disabled> Ajouter une ligne de valeurs au CDataframe<br>
+   <input type="checkbox" checked disabled> Supprimer une ligne de valeurs du CDataframe<br>
+   <input type="checkbox" checked disabled> Ajouter une colonne au CDataframe<br>
+   <input type="checkbox" checked disabled> Supprimer une colonne du CDataframe<br>
+   <input type="checkbox" checked disabled> Renommer le titre d’une colonne du CDataframe<br>
+   <input type="checkbox" checked disabled> Vérifier l’existence d’une valeur (recherche) dans le CDataframe<br>
+   <input type="checkbox" checked disabled> Accéder/remplacer la valeur se trouvant dans une cellule du CDataframe en utilisant son<br>
+   numéro de ligne et de colonne<br>
+   <input type="checkbox" checked disabled> Afficher les noms des colonnes <br>
+<br>
+4. Analyse et statistiques<br>
+   <input type="checkbox" checked disabled> Afficher le nombre de lignes<br>
+   <input type="checkbox" checked disabled> Afficher le nombre de colonnes<br>
+   <input type="checkbox" checked disabled> Nombre de cellules égales à x (x donné en paramètre)<br>
+   <input type="checkbox" checked disabled> Nombre de cellules contenant une valeur supérieure à x (x donné en paramètre)<br>
+   <input type="checkbox" checked disabled> Nombre de cellules contenant une valeur inférieure à x (x donné en paramètre)<br>
+</p>
