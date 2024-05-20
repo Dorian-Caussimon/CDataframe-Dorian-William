@@ -10,7 +10,7 @@ git hub link : https://github.com/Dorian-Caussimon/CDataframe-Dorian-William
 # Bienvenue dans notre dataframe.
 
 ## Description
-On nous a demandé de créer un dataframe pouvant être utilisé pour stocker tout type de données telles que des INT CHAR STRING UINT et autres, les fonctionnalités sont présentes [ici](#Fonctionalités), ce pro
+On nous a demandé de créer un dataframe pouvant être utilisé pour stocker tout type de données telles que des INT CHAR STRING UINT et autres, les fonctionnalités sont présentes [ici](#Fonctionalités)
 
 Liste des composants du projet :
 - Code (dossier contenant le code)
