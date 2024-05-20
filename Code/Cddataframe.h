@@ -47,6 +47,8 @@ CDATAFRAME* load_from_csv(char *file_name, ENUM_TYPE *dftype, int size);
 
 ENUM_TYPE *fill(int size);
 
+void save_into_csv(CDATAFRAME *cdf, char *file_name);
+
 #ifndef CDATAFRAME_DORIAN_WILLIAM_CDDATAFRAME_H
 #define CDATAFRAME_DORIAN_WILLIAM_CDDATAFRAME_H
 

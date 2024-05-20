@@ -2,8 +2,8 @@
 int main()
 {
     CDATAFRAME *cdf = NULL;
-    int selection, running = 1,case1 = 0,case2 = 0, case3 = 0, case4 = 0,nb_col = 0 , pos = 0,pos_row = 0, pos_col =0;
-    char name[100];
+    int selection, running = 1,case1 = 0,case2 = 0, case3 = 0, case4 = 0,case5 = 0,nb_col = 0 , pos = 0,pos_row = 0, pos_col =0;
+    char name[100] ,file_name_csv[100];
     printf("===Bienvenue dans le Cdataframe de William et Dorian===\n");
 
     while(running == 1 ) {
@@ -11,7 +11,8 @@ int main()
                "Taper 2 pour tout ce qui est affichages d'un dataframe\n"
                "Taper 3 pour les operation usuelles\n"
                "Taper 4 pour tout ce qui est analyse est statistiques\n"
-               "Taper 5 pour sortir du programe\n"
+               "Taper 5 pour tout cer qui a un raport avec les fichier CSV\n"
+               "Taper 6 pour sortir du programe\n"
                "Selectioner la fonctionalite desire :");
         scanf("%d",&selection);
 
@@ -144,8 +145,26 @@ int main()
 
                 }
                 break;
-
             case 5:
+                printf("1- Pour importer des données d'un fichier CSV\n"
+                       "2- Pour exporter le Dataframe sous CSV\n"
+                       "Selectioner la fonctionalite desire :");
+                       scanf("%d",&case5);
+                switch (case5) {
+                    case 1:
+                        printf("fonctionalité indisponile");
+                        break;
+                    case 2:
+                        printf("Veuiller saisir un nom pour le fichier CSV:");
+                        scanf("%s",file_name_csv);
+                        save_into_csv(cdf,file_name_csv);
+                        break;
+                    default:
+                        printf("Mauvaise valeur\n");
+                        break;
+                }
+                break;
+            case 6:
                 printf("Merci d'avoir utiliser notre programe");
                 running = 0;
                 break;

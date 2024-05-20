@@ -321,3 +321,12 @@ void del_value_pos(COLUMN *col, int pos)
     }
     col->logical_size--;
 }
+
+void print_col(COLUMN* col){
+    char str[20];
+    printf("%s\n", col->title);
+    for(int i = 0 ; i < col->logical_size ; i++){
+        convert_value(col, i, str, 20);
+        printf("[%d] : %s\n",i+1,str);
+    }
+}

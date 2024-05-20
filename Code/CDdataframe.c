@@ -26,15 +26,20 @@ CDATAFRAME *create_cdataframe(ENUM_TYPE *cdftype, int size)
 //Création d'un dataframe grâce à des saisies utilisateurs
 CDATAFRAME *create_dataframe_by_user()
 {
-    int value = 0,nb_col = 0;
+    int value = -1,nb_col = -1;
     printf("Veuiller saisir le nombre de colonne :"); // recueillir info utilisateu
-    scanf("%d",&nb_col); // faire une saisie sécurisé-----------------------------------
+    while (nb_col < 0) {
+        scanf("%d", &nb_col);
+    }
     ENUM_TYPE cdftype[nb_col];
 
     printf("Veuiller saisir le type de donne contenue dans la colonne, 1 pour UNIT , 2-INT, 3-CHAR, 4-FLOAT, 5-DOUBLE, 6-STRING, 7-STRUCTURE\n");// recueillir info utilisateu
     for (int i = 0; i < nb_col ;i++){
-        printf("Colonne [%d] :",i+1);// faire une saisie sécurisé-----------------------------------
-        scanf("%d",&value);
+        value = 0;
+        while (value <= 0 || value > 8){
+            printf("Colonne [%d] :", i + 1);// faire une saisie sécurisé-----------------------------------
+            scanf("%d",&value);
+        }
         cdftype[i] = value+1; // +1 pour s'alligner avec l'enum type
     }
     CDATAFRAME *cdf = create_cdataframe(cdftype,nb_col);
@@ -389,16 +394,16 @@ void count_val_inf_CDF(CDATAFRAME *cdf){
 //non foctionelle
 CDATAFRAME* load_from_csv(char *file_name, ENUM_TYPE *dftype, int size)
 {
-    int val1;
-    unsigned int val2;
-    float val3;
-    double val4;
+    int val1 = 0;
+    unsigned int val2 = 0;
+    float val3 = 0;
+    double val4 = 0;
     char val5;
-    FILE *file;
+    FILE *file = NULL;
     CDATAFRAME *cdf = create_cdataframe(dftype, size); // création du cdf
     COLUMN *col = NULL;
     lnode *newnode = NULL,*node = NULL;
-    char*title = "Column", path[50];
+    char *title = "Column", path[50];
     sprintf(path,"..\\CSV\\%s",file_name);
     file = fopen(path,"r");
     if (file == NULL){ // verifier si le fichier a bien été
@@ -408,22 +413,32 @@ CDATAFRAME* load_from_csv(char *file_name, ENUM_TYPE *dftype, int size)
 
     for (int i = 0 ; i < size; i++ ){ // creation des colonne et implementation des col dans le cdf
         //sprintf(title,"Colonne[%d]",i+1);
-        col = NULL;
         col = create_column(dftype[i], title);
+        //printf("%d, %s\n",dftype[i],title);
         newnode = lst_create_lnode(col);
+        print_col(col);
         lst_insert_tail(cdf->list,newnode);
     }
+    node = cdf->list->head;
+    for (int i = 0 ; i< size; i++){
+        col = node->data;
+        printf("%d\n",col->column_type);
+        node = node->next;
+    }
+    full_printCdataframe(cdf);
     free(newnode);
-
     char ligne[MAX_LINE_LENGHT]; // Buffer pour stocker chaque ligne lue
     while (fgets(ligne, MAX_LINE_LENGHT, file) != NULL) {
         node = cdf->list->head;
         char *valeur = strtok(ligne, ","); // Séparer la ligne en valeurs séparées par les virgules
+        printf("here2\n");
         while (valeur != NULL) {
             col = node->data;
+            printf("%d\n",col->column_type);
+            printf("here1\n");
             switch (col->column_type){
                 case INT:
-                    val1 = atoi(valeur);
+                    val1 = strtol(valeur,NULL,10);
                     insert_value(col,&val1);
                     break;
                 case UINT:
@@ -431,11 +446,12 @@ CDATAFRAME* load_from_csv(char *file_name, ENUM_TYPE *dftype, int size)
                     insert_value(col,&val2);
                     break;
                 case FLOAT:
+                    printf("here5\n");
                     val3 = atof(valeur);
                     insert_value(col,&val3);
                     break;
                 case DOUBLE:
-                     val4 = strtod(valeur,NULL);
+                    val4 = strtod(valeur,NULL);
                     insert_value(col,&val4);
                     break;
                 case CHAR:
@@ -448,12 +464,40 @@ CDATAFRAME* load_from_csv(char *file_name, ENUM_TYPE *dftype, int size)
                 default:
                     break;
             }
-            printf("here\n");
             valeur = strtok(NULL, ","); // Passer à la valeur suivante
             node = node->next;
+
         }
     }
     fclose(file);
     return cdf;
+
+}
+// permet de sauvegarder le CDF sous forme de fichier CSV
+void save_into_csv(CDATAFRAME *cdf, char *file_name)
+{
+    if (cdf == NULL){
+        printf("Dataframe vide");
+    }
+    FILE *file;
+    char name[100],str[100];
+    int max = max_row_col_cdf(cdf);
+    COLUMN *col = NULL;
+    lnode *node = NULL;
+    sprintf(name,"..\\CSV\\%s",file_name);
+    file = fopen(name,"w");
+    if (file == NULL){
+        printf("Erreur");
+    }
+    for (int j = 0 ; j < max ; j++){
+        node = cdf->list->head;
+        for(int i = 0 ; i < cdf->size;i++){
+            col = node->data;
+            convert_value(col,j,str,50);
+            fprintf(file,"%s,", str);
+            node = node->next;
+        }
+        fprintf(file,"\n");
+    }
 
 }

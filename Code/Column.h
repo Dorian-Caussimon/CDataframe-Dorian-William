@@ -64,6 +64,7 @@ void del_value_pos(COLUMN *col, int nb_row);
 
 void user_value(COLUMN *col);
 
+void print_col(COLUMN* col);
 #ifndef DATAFRAME_C_FUNCTION_H
 #define DATAFRAME_C_FUNCTION_H
 
