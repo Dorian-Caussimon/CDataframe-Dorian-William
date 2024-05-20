@@ -1,25 +1,39 @@
-# CDataframe-Dorian-William
+<h1 align="center">
+<br>
+<img src="Images/Logo.jpg" alt="Markdownify" width="500">
+</h1>
+<h2 align="center">
+CDataframe-Dorian-William
+</h2>
 git hub link : https://github.com/Dorian-Caussimon/CDataframe-Dorian-William
 
-Bienvenue dans notre data frame.
-Liste des fichier :
+# Bienvenue dans notre dataframe.
+
+## Description
+On nous a demandé de créer un dataframe pouvant être utilisé pour stocker tout type de données telles que des INT CHAR STRING UINT et autres, les fonctionnalités sont présentes [ici](#Fonctionalités), ce pro
+
+Liste des composants du projet :
 - Code (dossier contenant le code)
-  - CDataframe.c
+  - CDataframe.c (fichier contenant fonction permettant le bon fonctionnement du dataframe)
   - Cdataframe.h
-  - Column.c
+  - Column.c (fichier contenant fonction permettant le bon fonctionnement des colonnes)
   - Columne.h
   - main.c (menu)
-  - Tri.c ()
-  - Tri.h ()
+  - Tri.c 
+  - Tri.h
   - list (dossier pour la liste chainer)
     - list.c
     - list.h
 - CSV (fichier ou placer les fichier csv)
   - data.csv
+
 ## Téléchargement
+Pour télécharger le projet il faut vous rendre sur git hub télécharger le fichier zip puis l'ouvrir dans un IDE le compiler, puis plus qu'à le lancer et s'amuser
 
-
+## Utilisation
+Pour utiliser le programme, il vous suffit de suivre les instructions présentes dans votre terminal,et tapez-les nombres correspondant à votre besoin
 ## Fonctionalités
+Voici la liste des fonctionnalités présentes,
 1. Alimentation
    -[x] Création d’un CDataframe vide
    -[x] Remplissage du CDataframe à partir de saisies utilisateurs
