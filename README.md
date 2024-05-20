@@ -63,3 +63,7 @@ Voici la liste des fonctionnalités présentes,
    <input type="checkbox" checked disabled> Nombre de cellules contenant une valeur supérieure à x (x donné en paramètre)<br>
    <input type="checkbox" checked disabled> Nombre de cellules contenant une valeur inférieure à x (x donné en paramètre)<br>
 </p>
+
+## Credits
+Wiliam Kuang (william.kuang@efrei.net) <br>
+Dorian Caussimon (dorian.caussimon--lucas@efrei.net)
