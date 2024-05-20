@@ -34,6 +34,7 @@ Pour télécharger le projet il faut vous rendre sur git hub télécharger le fi
 Pour utiliser le programme, il vous suffit de suivre les instructions présentes dans votre terminal,et tapez-les nombres correspondant à votre besoin
 ## Fonctionalités
 Voici la liste des fonctionnalités présentes,
+<br>
 <p>
 1. Alimentation<br>
 <input type="checkbox" checked disabled> Création d’un CDataframe vide<br>
@@ -62,6 +63,9 @@ Voici la liste des fonctionnalités présentes,
    <input type="checkbox" checked disabled> Nombre de cellules égales à x (x donné en paramètre)<br>
    <input type="checkbox" checked disabled> Nombre de cellules contenant une valeur supérieure à x (x donné en paramètre)<br>
    <input type="checkbox" checked disabled> Nombre de cellules contenant une valeur inférieure à x (x donné en paramètre)<br>
+5. fichier.CSV<br>
+  <input type="checkbox" disabled>
+  <input type="checkbox" checked disabled> Enregistrer un Dataframe sous un fiché CSV
 </p>
 
 ## Credits
