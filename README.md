@@ -39,7 +39,6 @@ Voici la liste des fonctionnalités présentes,
 1. Alimentation<br>
 <input type="checkbox" checked disabled> Création d’un CDataframe vide<br>
 <input type="checkbox" checked disabled> Remplissage du CDataframe à partir de saisies utilisateurs<br>
-<input type="checkbox" disabled> Remplissage en dur du CDataframe<br>
 <br>
 2. Affichage<br>
    <input type="checkbox" checked disabled> Afficher tout le CDataframe<br>
